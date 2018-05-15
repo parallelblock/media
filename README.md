@@ -1,7 +1,7 @@
 # Media
 
 This repository contains media artifacts for ParallelBlock LLC. Artifact
-generation is done using a Makefile with inkscape as the backbone compilation
+generation is done using a Makefile with Inkscape as the backbone compilation
 tool - you can inspect how they interact by inspecting the Makefile.
 
 You can build the artifacts using the following command:
