@@ -5,7 +5,7 @@ pipeline:
   publish:
     image: parallelblock/mediabuilder
     commands: make upload.all
-    secrets: [UPLOADLOC]
+    secrets: [uploadloc]
     when:
       branch: master
       event: push
