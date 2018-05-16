@@ -4,8 +4,8 @@ pipeline:
     commands: make all
   publish:
     image: parallelblock/mediabuilder
-    commands: bash -c "echo \"machine ${uploadloc}\" > ~/.netrc && echo \"  login ${uploaduser}\" >> ~/.netrc && echo \"  password ${uploadpass}\" >> ~/.netrc && make upload.all"
-    secrets: [UPLOADUSER, UPLOADLOC, UPLOADPASS]
+    commands: make upload.all
+    secrets: [UPLOADLOC]
     when:
       branch: master
       event: push
