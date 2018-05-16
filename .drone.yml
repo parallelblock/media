@@ -5,9 +5,9 @@ pipeline:
   publish:
     image: parallelblock/mediabuilder
     commands: 
-    - echo "machine ${DRONE_NETRC_MACHINE}" >> ~/.netrc
-    - echo "  login ${DRONE_NETRC_USERNAME}" >> ~/.netrc
-    - echo "  password ${DRONE_NETRC_PASSWORD}" >> ~/.netrc
+    - echo "machine $DRONE_NETRC_MACHINE" >> ~/.netrc
+    - echo "  login $DRONE_NETRC_USERNAME" >> ~/.netrc
+    - echo "  password $DRONE_NETRC_PASSWORD" >> ~/.netrc
     - make upload.all
     secrets: [uploadloc, drone_netrc_machine, drone_netrc_username, drone_netrc_password]
     when:
