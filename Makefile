@@ -1,12 +1,9 @@
 builddir := ./build
 
+# never delete unless a make clean
+.SECONDARY:
 .PHONY: all
-all : $(builddir)/artifacts.zip \
-	$(builddir)/colored_shadow_swatch.sq.all $(builddir)/plain_swatch.sq.all $(builddir)/compact_logo.all $(builddir)/horiz_logo.all ;
-
-.PHONY: clean
-clean :
-	rm -r $(builddir)
+all : $(builddir)/colored_shadow_swatch.sq.all $(builddir)/plain_swatch.sq.all $(builddir)/compact_logo.all $(builddir)/horiz_logo.all $(builddir)/artifacts.zip ;
 
 i_exec := inkscape
 i_flags := -z
@@ -15,15 +12,19 @@ inkscape = $(i_exec) $(i_flags)
 
 sizes := 16 32 64 128 256 512
 
-$(builddir)/%.svg : %.ink.svg
+$(builddir):
+	mkdir $(builddir)
+
+
+$(builddir)/%.svg : %.ink.svg $(builddir)
 	$(inkscape) -l $@ $<
 
-$(builddir)/%.png : %.ink.svg
+$(builddir)/%.png : %.ink.svg $(builddir)
 	$(inkscape) -e $@ $<
 
 define SIZED_PNG_GEN
 
-$(builddir)/%.$(1)x$(1).png : %.ink.svg
+$(builddir)/%.$(1)x$(1).png : %.ink.svg $(builddir)
 	$(inkscape) -e $$@ -w $(1) -h $(1) $$<
 
 endef
@@ -50,3 +51,7 @@ $(builddir)/artifacts.zip : $(builddir)/colored_shadow_swatch.sq.all $(builddir)
 
 .PHONY: upload.all
 upload.all : $(builddir)/artifacts.zip $(builddir)/colored_shadow_swatch.upload.sq.all $(builddir)/plain_swatch.upload.sq.all $(builddir)/compact_logo.upload.all $(builddir)/horiz_logo.upload.all
+
+.PHONY: clean
+clean:
+	rm -r $(builddir)
