@@ -1,0 +1,11 @@
+pipeline:
+  build:
+    image: parallelblock/mediabuilder
+    commands: make all
+  publish:
+    image: parallelblock/mediabuilder
+    commands: bash -c "echo \"machine ${uploadloc}\" > ~/.netrc && echo \"  login ${uploaduser}\" >> ~/.netrc && echo \"  password ${uploadpass}\" >> ~/.netrc && make upload.all"
+    secrets: [UPLOADUSER, UPLOADLOC, UPLOADPASS]
+    when:
+      branch: master
+      event: push
