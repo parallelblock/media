@@ -50,7 +50,7 @@ $(builddir)/artifacts.zip : $(builddir)/colored_shadow_swatch.sq.all $(builddir)
 %.upload.sq.all : %.upload.all $(foreach size,$(sizes),%.$(size)x$(size).png.upload) ;
 
 .PHONY: upload.all
-upload.all : $(builddir)/artifacts.zip $(builddir)/colored_shadow_swatch.upload.sq.all $(builddir)/plain_swatch.upload.sq.all $(builddir)/compact_logo.upload.all $(builddir)/horiz_logo.upload.all
+upload.all : $(builddir)/artifacts.zip.upload $(builddir)/colored_shadow_swatch.upload.sq.all $(builddir)/plain_swatch.upload.sq.all $(builddir)/compact_logo.upload.all $(builddir)/horiz_logo.upload.all
 
 .PHONY: clean
 clean:
