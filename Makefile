@@ -41,7 +41,7 @@ $(builddir)/artifacts.zip : $(builddir)/colored_shadow_swatch.sq.all $(builddir)
 
 .PHONY: %.upload
 %.upload : %
-	curl -vvv --fail -n --upload-file $< '${UPLOADLOC}/$(<F)'
+	curl --fail -n --upload-file $< '${UPLOADLOC}/$(<F)'
 
 .PHONY: %.upload.all
 %.upload.all : %.svg.upload %.png.upload ;
